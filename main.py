@@ -1,13 +1,16 @@
-import undetected_chromedriver
-import time
+from selenium import webdriver
+import math
 
 
-try:
-    driver = undetected_chromedriver.Chrome()
-    driver.get('https://www.ozon.ru/product/elektricheskaya-zubnaya-shchetka-oral-b-pro-3-3500-goluboy-281045877/?sh=DN74W5yMAg')
-    time.sleep(15)
-except Exception as ex:
-    print(ex)
-finally:
-    driver.close()
-    driver.quit()
+def calc(x):
+    return str(math.log(abs(12 * math.sin(int(x)))))
+
+
+browser = webdriver.Chrome()
+browser.get("http://suninjuly.github.io/redirect_accept.html")
+browser.find_element_by_css_selector(".btn").click()  # Yeah science, bi@#h! =)
+new_window = browser.window_handles[1]
+browser.switch_to_window(new_window)
+x = browser.find_element_by_id("input_value").text
+browser.find_element_by_id("answer").send_keys(calc(x))
+browser.find_element_by_css_selector(".btn-primary").click()
